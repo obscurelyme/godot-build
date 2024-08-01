@@ -33,4 +33,6 @@ Will need to leverage Windows 10 SDK to use both `makecert` and `signtool`
 
 ```sh
 makecert -r -pe -n "CN=[NAME OF SIGNER]" -a sha256 -sky signature -cy authority -sv CArootkey.pvk -len 2048 -m 13 CArootcert.cer
+
+signtool sign -f certificate.pfx -fd SHA256 -p [password] -t http://timestamp.digicert.com example.exe
 ```
