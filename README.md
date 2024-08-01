@@ -23,3 +23,14 @@ docker run -d --name binaries_container godot-binaries
 docker cp binaries_container:/godot-4.2.2-stable/bin .
 docker container remove binaries_container
 ```
+
+Sign the executables for distribution
+
+Will need to leverage Windows 10 SDK to use both `makecert` and `signtool`
+
+[makecert](https://learn.microsoft.com/en-us/windows/win32/seccrypto/makecert)
+[signtool](https://learn.microsoft.com/en-us/windows/win32/seccrypto/using-signtool-to-sign-a-file)
+
+```sh
+makecert -r -pe -n "CN=[NAME OF SIGNER]" -a sha256 -sky signature -cy authority -sv CArootkey.pvk -len 2048 -m 13 CArootcert.cer
+```
