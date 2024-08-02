@@ -23,10 +23,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build
         uses: docker/build-push-action@v6
         with:
           push: false
           tags: user/app:${{github.event.inputs.tag}}
           build-args:
             - SCRIPT_AES256_ENCRYPTION_KEY=${{secrets.SCRIPT_AES256_ENCRYPTION_KEY}}
+
+      - name: Run
+        run: |
+          docker run -d --name binaries_container godot-binaries
+          docker cp binaries_container:/godot-4.2.2-stable/bin .
+          docker container remove binaries_container
