@@ -13,7 +13,7 @@ Build with encryption, you will need to set your own encryption key separate of 
 More info on how to do that [here](https://docs.godotengine.org/en/stable/contributing/development/compiling/compiling_with_script_encryption_key.html)
 
 ```sh
-docker build -t godot-binaries . --build-arg SCRIPT_AES256_ENCRYPTION_KEY=$(echo $SCRIPT_AES256_ENCRYPTION_KEY)
+docker build -t godot-binaries . --build-arg SCRIPT_AES256_ENCRYPTION_KEY=$(echo $SCRIPT_AES256_ENCRYPTION_KEY) --build-arg GODOT_VERSION=[GODOT_VERSION]
 ```
 
 Extract the binaries
